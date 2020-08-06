@@ -2,9 +2,15 @@
     "categorias":[
         {
         "id": 1,
-        "nome": "cat",
+        "nome": "Back-end",
         "descricao": "uma cat",
         "cor": "#6bd1ff"
-        }
+        },
+        {
+            "id": 2,
+            "nome": "Front-end",
+            "descricao": "uma cat",
+            "cor": "#6bd1ff"
+         }
     ]
 }
