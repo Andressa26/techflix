@@ -1,0 +1,10 @@
+{
+    "categorias":[
+        {
+        "id": 1,
+        "nome": "cat",
+        "descricao": "uma cat",
+        "cor": "#6bd1ff"
+        }
+    ]
+}
