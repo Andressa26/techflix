@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
-import FormField from '../../../components/Carousel/components/FormFielde';
+import FormField from '../../../components/Carousel/components/FormField';
 import Button from '../../../components/Button';
+import useForm from '../../../hooks/useForm';
 
 function CadastroCategoria() {
   const valoresIniciais = {
@@ -10,24 +11,13 @@ function CadastroCategoria() {
     descricao: '',
     cor: '#ffffff',
   };
+  const { handleChange, valores, limpaValores } = useForm(valoresIniciais);
   const [categorias, setCategorias] = useState([]);
-  const [valores, setValores] = useState(valoresIniciais);
 
-  function setValor(chave, valor) {
-    // chave: nome, descricao, bla
-    setValores({
-      ...valores,
-      [chave]: valor, // nome: 'valor'
-    });
-  }
-  function handleChange(infosDoEvento) {
-    setValor(
-      infosDoEvento.target.getAttribute('name'),
-      infosDoEvento.target.value,
-    );
-  }
   useEffect(() => {
-    const URL_TOP = 'http://localhost:8080/categorias';
+    const URL_TOP = window.location.href.includes('localhost')
+      ? 'http://localhost:8080/categorias'
+      : 'https://ttechflix.herokuapp.com/categorias';
     fetch(URL_TOP)
       .then(async (respostaDoServidor) => {
         const resposta = await respostaDoServidor.json();
@@ -38,7 +28,7 @@ function CadastroCategoria() {
   }, []);
   /* const URL_TOP = window.location.href.includes('localhost')
       ? 'http://localhost:8080/categorias'
-      : 'http://localhost:8080/categorias';
+      : 'https://ttechflix.herokuapp.com/categorias';
     fetch(URL_TOP)
       .then(async (respostaDoServer) => {
         if (respostaDoServer.ok) {
@@ -76,7 +66,7 @@ function CadastroCategoria() {
           ...categorias,
           valores,
         ]);
-        setValores(valoresIniciais);
+        limpaValores(valoresIniciais);
       }}
       >
         <FormField
@@ -107,10 +97,16 @@ function CadastroCategoria() {
           Cadastrar
         </Button>
       </form>
+      {categorias.length === 0 && (
+        <div>
+          Carregando...
+        </div>
+      )}
       <ul>
         {categorias.map((categoria, indice) => (
+          // eslint-disable-next-line react/no-array-index-key
           <li key={`${categoria}${indice}`}>
-            {categoria.nome}
+            {categoria.titulo}
           </li>
         ))}
       </ul>
