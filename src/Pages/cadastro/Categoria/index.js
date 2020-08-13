@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/Carousel/components/FormField';
 import Button from '../../../components/Button';
 import useForm from '../../../hooks/useForm';
+import categoriasRepository from '../../../repositories/categorias';
 
 function CadastroCategoria() {
+  const history = useHistory();
   const valoresIniciais = {
     nome: '',
     descricao: '',
@@ -34,6 +36,7 @@ function CadastroCategoria() {
         {valores.nome}
       </h1>
 
+      {/*
       <form onSubmit={function handleSubmit(infosDoEvento) {
         infosDoEvento.preventDefault();
         setCategorias([
@@ -43,8 +46,25 @@ function CadastroCategoria() {
         limpaValores(valoresIniciais);
       }}
       >
+    */}
+      <form onSubmit={(event) => {
+        event.preventDefault();
+        alert('Categoria cadastrada!');
+        categoriasRepository.create({
+          titulo: valores.nome,
+          cor: valores.cor,
+          link_extra: {
+            text: valores.descricao,
+            url: valores.url,
+          },
+        })
+          .then(() => {
+            history.push('/');
+          });
+      }}
+      >
         <FormField
-          label="Nome da Categoria"
+          label="Título da Categoria"
           tag="input"
           type="text"
           name="nome"
@@ -60,6 +80,14 @@ function CadastroCategoria() {
           onChange={handleChange}
         />
         <FormField
+          label="URL Descrição da Categoria"
+          tag="input"
+          type="text"
+          name="url"
+          value={valores.url}
+          onChange={handleChange}
+        />
+        <FormField
           label="Cor"
           tag="input"
           type="color"
@@ -67,7 +95,7 @@ function CadastroCategoria() {
           value={valores.cor}
           onChange={handleChange}
         />
-        <Button>
+        <Button type="submit">
           Cadastrar
         </Button>
       </form>

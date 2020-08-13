@@ -40,6 +40,15 @@
         "text": "Formação de Jogos na Alura",
         "url": "https://www.alura.com.br/cursos-online-front-end"
       }
+    },
+    {
+      "titulo": "Andressa",
+      "cor": "#360c0c",
+      "link_extra": {
+        "text": "a",
+        "url": "https://www.youtube.com/watch?v=jOAU81jdi-c"
+      },
+      "id": 6
     }
   ],
   "videos": [
@@ -192,6 +201,18 @@
       "url": "https://www.youtube.com/watch?v=jOAU81jdi-c",
       "categoriaId": 1,
       "id": 25
+    },
+    {
+      "titulo": "Video padrão",
+      "url": "https://www.youtube.com/watch?v=jOAU81jdi-c",
+      "categoriaId": 1,
+      "id": 26
+    },
+    {
+      "titulo": "Video padrão",
+      "url": "https://www.youtube.com/watch?v=jOAU81jdi-c",
+      "categoriaId": 6,
+      "id": 27
     }
   ]
 }
